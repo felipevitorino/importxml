@@ -14,7 +14,7 @@ public class NotaFiscalFile implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	public NotaFiscalFile(Long notaFiscalId, byte[] conteudo){
+	public NotaFiscalFile(String notaFiscalId, byte[] conteudo){
 		this.notaFiscalId = notaFiscalId;
 		this.conteudo = conteudo;
 	}
@@ -23,16 +23,16 @@ public class NotaFiscalFile implements Serializable{
 
 	@Id
 	@Column(name = "nota_fiscal_id")
-	private Long notaFiscalId;
+	private String notaFiscalId;
 
 	@Lob
 	private byte[] conteudo;
 
-	public Long getNotaFiscalId() {
+	public String getNotaFiscalId() {
 		return notaFiscalId;
 	}
 
-	public void setNotaFiscalId(Long notaFiscalId) {
+	public void setNotaFiscalId(String notaFiscalId) {
 		this.notaFiscalId = notaFiscalId;
 	}
 

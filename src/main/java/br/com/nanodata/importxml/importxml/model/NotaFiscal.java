@@ -2,7 +2,9 @@ package br.com.nanodata.importxml.importxml.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,22 +17,41 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "nota_fiscal")
-public class NotaFiscal implements Serializable{
-	
+public class NotaFiscal implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+	
+	public NotaFiscal() {}
+
+	public NotaFiscal(String idNotaFiscal, LocalDateTime dataEmissao, Long numeroNota, Long cUF, Long cnpjEmitente,
+			String nomeFantasiaEmitente, Long cnpjDestinatario, String nomeDestinatario, BigDecimal valorTotalTributos,
+			BigDecimal valorTotalNota, NotaFiscalFile file) {
+		this.idNotaFiscal         = idNotaFiscal;
+		this.dataEmissao          = dataEmissao;
+		this.numeroNota           = numeroNota;
+		this.cUF                  = cUF;
+		this.cnpjEmitente         = cnpjEmitente;
+		this.nomeFantasiaEmitente = nomeFantasiaEmitente;
+		this.cnpjDestinatario     = cnpjDestinatario;
+		this.nomeDestinatario     = nomeDestinatario;
+		this.valorTotalTributos   = valorTotalTributos;
+		this.valorTotalNota       = valorTotalNota;
+		this.notaFiscalFile       = file;
+	}
 
 	@Id
 	@Column(name = "id_nota_fiscal")
-	private Long idNotaFiscal;
+	private String idNotaFiscal;
 
 	@Column(name = "data_emissao")
-	private LocalDate dataEmissao;
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime dataEmissao;
 
 	@Column(name = "numero_nota")
 	private Long numeroNota;
 
 	@Column(name = "cuf")
-	private String cUF;
+	private Long cUF;
 
 	@Column(name = "cnpj_emitente")
 	private Long cnpjEmitente;
@@ -51,22 +72,22 @@ public class NotaFiscal implements Serializable{
 	private BigDecimal valorTotalNota;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	@PrimaryKeyJoinColumn(name="id_nota_fiscal", referencedColumnName="nota_fiscal_id")
+	@PrimaryKeyJoinColumn(name = "id_nota_fiscal", referencedColumnName = "nota_fiscal_id")
 	private NotaFiscalFile notaFiscalFile;
 
-	public Long getIdNotaFiscal() {
+	public String getIdNotaFiscal() {
 		return idNotaFiscal;
 	}
 
-	public void setIdNotaFiscal(Long idNotaFiscal) {
+	public void setIdNotaFiscal(String idNotaFiscal) {
 		this.idNotaFiscal = idNotaFiscal;
 	}
 
-	public LocalDate getDataEmissao() {
+	public LocalDateTime getDataEmissao() {
 		return dataEmissao;
 	}
 
-	public void setDataEmissao(LocalDate dataEmissao) {
+	public void setDataEmissao(LocalDateTime dataEmissao) {
 		this.dataEmissao = dataEmissao;
 	}
 
@@ -78,11 +99,11 @@ public class NotaFiscal implements Serializable{
 		this.numeroNota = numeroNota;
 	}
 
-	public String getcUF() {
+	public Long getcUF() {
 		return cUF;
 	}
 
-	public void setcUF(String cUF) {
+	public void setcUF(Long cUF) {
 		this.cUF = cUF;
 	}
 

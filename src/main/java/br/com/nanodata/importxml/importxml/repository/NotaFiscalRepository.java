@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import br.com.nanodata.importxml.importxml.model.NotaFiscal;
 
 @Repository
-public interface NotaFiscalRepository extends JpaRepository<NotaFiscal, Long>{
+public interface NotaFiscalRepository extends JpaRepository<NotaFiscal, String>{
+	
 
 }
