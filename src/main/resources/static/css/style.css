@@ -1,0 +1,48 @@
+body {
+	background-color: #9b9b9b;
+}
+
+#container {
+	background-color: white;
+	width: fit-content;
+	min-width: 500px; min-height : 400px; margin : 50px auto;
+	/* Margem automática nas laterais */
+	padding: 20px; /* Espaçamento interno opcional */
+	text-align: center; /* Centralizar o conteúdo interno */
+	font-family: "Poppins", sans-serif;
+	margin: 50px auto;
+	min-height: 400px;
+}
+
+#arquivos_selecionados {
+	border: 2px solid;
+	margin: 10px;
+	min-height: 100px;
+}
+
+#div_arquivo {
+	text-align: center;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+label {
+	padding: 10px 10px;
+	width: 300px;
+	background-color: #333;
+	color: #FFF;
+	text-transform: uppercase;
+	text-align: center;
+	display: inline-block;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th {
+    padding: 5px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Notas Fiscais</title>
+</head>
+<body>
+    <div id="container" class="w3-container w3-card-4">
+        <img alt="nanodata" src="https://nanodata.com.br/wp-content/uploads/2021/10/nanodata-black-3.png">
+        <div id="import">
+            <h2>Visualizar Notas Fiscais</h2>
+            <table class="w3-table-all" >
+                <thead>
+                    <tr class="w3-dark-grey">
+                        <th>ID </th>
+                        <th>UF</th>
+                        <th>CNPJ Destinatário</th>
+                        <th>CNPJ Emitente</th>
+                        <th>Data Emissão</th>
+                        <th>Nome Destinatário</th>
+                        <th>Nome Fantasia Emitente</th>
+                        <th>Número Nota</th>
+                        <th>Valor Total Nota</th>
+                        <th>Valor Total Tributos</th>
+                        <th>Download Arquivo</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela_notas_fiscais">
+                </tbody>
+            </table>
+            
+            <br>
+            <div>
+                <a href="index.html" class="w3-btn w3-gray">Voltar</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    window.onload = function() {
+        // Realiza a requisição GET para /notafiscal
+        fetch('/notafiscal')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter dados das notas fiscais');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Preenche dinamicamente a tabela com os dados das notas fiscais
+                const tabela = document.getElementById('tabela_notas_fiscais');
+                data.forEach(notaFiscal => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${notaFiscal.idNotaFiscal}</td>
+                        <td>${notaFiscal.cUF}</td>
+                        <td>${notaFiscal.cnpjDestinatario}</td>
+                        <td>${notaFiscal.cnpjEmitente}</td>
+                        <td>${notaFiscal.dataEmissao}</td>
+                        <td>${notaFiscal.nomeDestinatario}</td>
+                        <td>${notaFiscal.nomeFantasiaEmitente}</td>
+                        <td>${notaFiscal.numeroNota}</td>
+                        <td>${notaFiscal.valorTotalNota}</td>
+                        <td>${notaFiscal.valorTotalTributos}</td>
+                        <td><a href="/notafiscal/download/${notaFiscal.idNotaFiscal}" class="w3-btn w3-blue">Download</a></td>
+                    `;
+                    tabela.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    };
+    </script>
+</body>
+</html>

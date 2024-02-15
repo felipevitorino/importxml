@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<link rel="stylesheet" href="css/style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload de Arquivos XML</title>
+</head>
+<body>
+    <div id="container" class="w3-container w3-card-4">
+        <img alt="nanodata"
+            src="https://nanodata.com.br/wp-content/uploads/2021/10/nanodata-black-3.png">
+        <div id="import">
+            <h2>Upload de Arquivos XML</h2>
+            <form 
+                id="uploadForm"
+                enctype="multipart/form-data">
+                <br>
+                <label  for="arquivo">Selecione o arquivo XML</label>
+                <input class="inputfile"
+                    type="file" id="arquivo" name="arquivo"
+                    accept=".xml" multiple
+                    onchange="mostrarArquivosSelecionados(event)">
+                <br> <br>
+                <div>
+                    ARQUIVOS SELECIONADOS 
+                    <div id="arquivos_selecionados" class="arquivos-selecionados"></div>
+                </div>
+                <a href="index.html" class="w3-btn w3-gray">Voltar</a>
+                <input type="submit" class="w3-btn w3-blue" value="Enviar" onclick="enviarArquivos(event)">
+            </form>
+        </div>
+    </div>
+    <script>
+        function mostrarArquivosSelecionados(event) {
+            var input = event.target;
+            var listaArquivos = document.getElementById('arquivos_selecionados');
+            listaArquivos.innerHTML = '';
+
+            for (var i = 0; i < input.files.length; i++) {
+                var arquivo = input.files[i];
+                var listItem = document.createElement('div');
+                listItem.setAttribute("class", "div-arquivo");
+                listItem.innerText += arquivo.name;
+                listaArquivos.appendChild(listItem);
+            }
+        }
+        
+        function enviarArquivos(event) {
+            event.preventDefault(); // Impede o comportamento padrão de envio do formulário
+
+            var formData = new FormData();
+            var arquivos = document.getElementById('arquivo').files;
+            if (arquivos.length === 0) {
+                alert('Por favor, selecione um arquivo antes de enviar.');
+                return;
+            }
+            for (var i = 0; i < arquivos.length; i++) {
+                formData.append('arquivo', arquivos[i]);
+            }
+
+            fetch('http://localhost:8080/notafiscal/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Erro ao enviar arquivos');
+            })
+            .then(data => {
+                limparFormulario();
+                alert(data);
+            })
+            .catch(error => {
+                alert(error);
+            });
+        }
+        
+        function limparFormulario() {
+            document.getElementById("uploadForm").reset();
+            document.getElementById("arquivos_selecionados").innerHTML = ''; // Limpa a lista de arquivos selecionados
+        }
+    </script>
+</body>
+</html>
