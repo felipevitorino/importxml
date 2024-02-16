@@ -29,16 +29,29 @@ public class NotaFiscalService {
 	public void salvarNotaFiscal(NotaFiscal notaFiscal) {
 		repositorio.save(notaFiscal);
 	}
+	
+	public NotaFiscal obterPorId(String id) {
+		Optional<NotaFiscal> nf = repositorio.findById(id);
+		
+		if (nf.isPresent()) {
+			return nf.get();
+		}
+		return null;
+	}
 
 	public void processaXML(MultipartFile arquivoXml) throws IOException {
 		salvarNotaFiscal(processadorXml.processa(arquivoXml));
 	}
 	
 	public ByteArrayResource getArquivo(String idNFe) {
-		Optional<NotaFiscal> arquivo = repositorio.findById(idNFe);
-		if(arquivo.isPresent()) {
-			return new ByteArrayResource(arquivo.get().getNotaFiscalFile().getConteudo());
+		Optional<NotaFiscal> nf = repositorio.findById(idNFe);
+		if(nf.isPresent()) {
+			return new ByteArrayResource(nf.get().getNotaFiscalFile().getConteudo());
 		}
 		return null;
+	}
+	
+	public void apagaNotaPorId(String Id) {
+		repositorio.deleteById(Id);
 	}
 }

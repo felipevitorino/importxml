@@ -23,6 +23,8 @@ import br.com.nanodata.importxml.importxml.service.NotaFiscalService;
 @RequestMapping("/notafiscal")
 public class FileController {
 
+	private static final String EXT = ".ext";
+
 	private static final String TEXT_XML = "text/xml";
 
 	@Autowired
@@ -50,12 +52,12 @@ public class FileController {
 	}
 	
 	@GetMapping("/download/{idNfe}")
-	public ResponseEntity<ByteArrayResource>  download(@PathVariable("idNfe") String idNFe) {
+	public ResponseEntity<ByteArrayResource> download(@PathVariable("idNfe") String idNFe) {
 		
         ByteArrayResource resource = servico.getArquivo(idNFe);
         
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + idNFe + ".ext"); // Nome do arquivo
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + idNFe + EXT); // Nome do arquivo
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
         // Retornar a resposta com os bytes do arquivo
@@ -63,5 +65,4 @@ public class FileController {
                 .headers(headers)
                 .body(resource);
 	}
-
 }
