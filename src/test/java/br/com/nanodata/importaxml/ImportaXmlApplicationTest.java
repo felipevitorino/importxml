@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 import br.com.nanodata.importxml.ImportaXmlApplication;
-import br.com.nanodata.importxml.importxml.service.NotaFiscalService;
+import br.com.nanodata.importxml.service.NotaFiscalService;
 
 @SpringBootTest
 @ContextConfiguration(classes = ImportaXmlApplication.class)
