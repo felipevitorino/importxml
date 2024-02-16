@@ -1,4 +1,4 @@
-package br.com.nanodata.importxml.importxml.service;
+package br.com.nanodata.importxml.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

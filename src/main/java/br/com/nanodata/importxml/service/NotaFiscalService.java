@@ -1,4 +1,4 @@
-package br.com.nanodata.importxml.importxml.service;
+package br.com.nanodata.importxml.service;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.nanodata.importxml.importxml.model.NotaFiscal;
-import br.com.nanodata.importxml.importxml.processor.NotaFiscalProcessor;
-import br.com.nanodata.importxml.importxml.repository.NotaFiscalRepository;
+import br.com.nanodata.importxml.model.NotaFiscal;
+import br.com.nanodata.importxml.processor.NotaFiscalProcessor;
+import br.com.nanodata.importxml.repository.NotaFiscalRepository;
 
 @Service
 public class NotaFiscalService {

@@ -1,4 +1,4 @@
-package br.com.nanodata.importxml.importxml.processor;
+package br.com.nanodata.importxml.processor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +19,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import br.com.nanodata.importxml.importxml.model.NotaFiscal;
-import br.com.nanodata.importxml.importxml.model.NotaFiscalFile;
+import br.com.nanodata.importxml.model.NotaFiscal;
+import br.com.nanodata.importxml.model.NotaFiscalFile;
 
 /**
  * Classe responsável em processar o arquivo XML.

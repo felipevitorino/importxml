@@ -1,4 +1,4 @@
-package br.com.nanodata.importxml.importxml.controller;
+package br.com.nanodata.importxml.controller;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.nanodata.importxml.importxml.model.NotaFiscal;
-import br.com.nanodata.importxml.importxml.service.NotaFiscalService;
+import br.com.nanodata.importxml.model.NotaFiscal;
+import br.com.nanodata.importxml.service.NotaFiscalService;
 
 @RestController
 @RequestMapping("/notafiscal")
