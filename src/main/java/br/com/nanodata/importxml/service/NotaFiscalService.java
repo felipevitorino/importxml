@@ -9,6 +9,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.nanodata.importxml.dto.NotaFiscalDTO;
 import br.com.nanodata.importxml.model.NotaFiscal;
 import br.com.nanodata.importxml.processor.NotaFiscalProcessor;
 import br.com.nanodata.importxml.repository.NotaFiscalRepository;
@@ -22,8 +23,8 @@ public class NotaFiscalService {
 	@Autowired
 	NotaFiscalProcessor processadorXml;
 
-	public List<NotaFiscal> obterNotas() {
-		return repositorio.findAll();
+	public List<NotaFiscalDTO> obterNotas() {
+		return NotaFiscalDTO.converter(repositorio.findAll());
 	}
 	
 	public void salvarNotaFiscal(NotaFiscal notaFiscal) {

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.nanodata.importxml.model.NotaFiscal;
+import br.com.nanodata.importxml.dto.NotaFiscalDTO;
 import br.com.nanodata.importxml.service.NotaFiscalService;
 
 @RestController
@@ -47,7 +47,7 @@ public class FileController {
 	}
 
 	@GetMapping
-	public List<NotaFiscal> obterNotas() {
+	public List<NotaFiscalDTO> obterNotas() {
 		return servico.obterNotas();
 	}
 	
